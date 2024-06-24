@@ -52,3 +52,19 @@ INSERT INTO brh.dependente (cpf, colaborador, nome, parentesco, data_nascimento)
 INSERT INTO brh.dependente (cpf, colaborador, nome, parentesco, data_nascimento) VALUES ('243.258.588-67', 'F124', 'Cicrana de Tal', 'Cônjuge', to_date('1985-01-01', 'yyyy-mm-dd'));
 
 SELECT * FROM brh.dependente WHERE colaborador = 'F124';
+
+/*
+Crie uma consulta que liste:
+nome do colaborador;
+nome do dependente;
+data de nascimento do dependente;
+parentesco do dependente.
+Adicione o código da consulta em sql/comandos.sql
+Faça commit do arquivo.
+Regras de aceitação
+O resultado deve ser ordenado pelo nome do colaborador e pelo nome do dependente.*/
+
+
+SELECT c.nome, d.nome as dependente, d.data_nascimento as "data nasc dependete", d.parentesco 
+from brh.colaborador  c inner join brh.dependente  d on c.matricula = d.colaborador
+order by c.nome, d.nome;
