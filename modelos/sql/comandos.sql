@@ -68,3 +68,33 @@ O resultado deve ser ordenado pelo nome do colaborador e pelo nome do dependente
 SELECT c.nome, d.nome as dependente, d.data_nascimento as "data nasc dependete", d.parentesco 
 from brh.colaborador  c inner join brh.dependente  d on c.matricula = d.colaborador
 order by c.nome, d.nome;
+
+
+
+
+/*
+Contexto
+O departamento SECAP não é mais parte da nossa organização,
+e todos os colaboradores serão dispensados (somente para fins didáticos).
+
+Tarefa
+Remova o departamento SECAP da base de dados;
+Adicione os comandos em sql/comandos.sql
+Faça commit do arquivo.
+Atenção à ordem em que os registros devem ser removidos.*/
+commit;
+
+
+
+DELETE FROM brh.dependente WHERE colaborador IN (SELECT matricula FROM brh.colaborador WHERE departamento = 'SECAP');
+DELETE FROM brh.EMAIL_COLABORADOR WHERE colaborador IN (SELECT matricula FROM brh.colaborador WHERE departamento = 'SECAP');
+DELETE FROM brh.TELEFONE_COLABORADOR WHERE colaborador IN (SELECT matricula FROM brh.colaborador WHERE departamento = 'SECAP');
+
+commit;
+
+DELETE FROM brh.DEPARTAMENTO WHERE sigla =  'SECAP';
+commit;
+
+DELETE FROM brh.colaborador WHERE departamento = 'SECAP';
+
+select * from brh.colaborador WHERE departamento = 'SECAP';
